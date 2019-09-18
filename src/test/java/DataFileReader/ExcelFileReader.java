@@ -7,6 +7,8 @@ public class ExcelFileReader {
 
     public static void main(String[] args) {
 
+
+        ExcelSheetReader excelSheetReader = new ExcelSheetReader();
         //An index specifying a column called Search Query in the test sheet
         int invoiceNumber = 0;
         int nipNumber = 1;
@@ -19,18 +21,26 @@ public class ExcelFileReader {
         int email = 8;
         int phone = 9;
 
-        ExcelSheetReader excelSheetReader = new ExcelSheetReader();
+        ExcelSheetReader excelSheetReaderNextSheet = new ExcelSheetReader();
+        int nameOfService = 0;
+        int pKWiU = 1;
+        int netPrice = 2;
+        int grossPrice = 3;
+        int quantityOfProduct = 4;
 
         try {
 
             //Reading/downloading a file named FILE_NAME.xslx and a spreadsheet inside a file named FileName
             String excelFileLocation = System.getProperty("user.dir") + "/src/main/resources/" + "test.data.xlsx";
             excelSheetReader.setExcelFileSheet(excelFileLocation, "Client data");
+            excelSheetReaderNextSheet.setExcelFileSheet(excelFileLocation, "Product data");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+
         SheetDataReader sheetDataReader = new SheetDataReader(excelSheetReader.getExcelSheet());
+
 
         //Download values for the Search query column
         List<String> InvoiceNumberList = sheetDataReader.getDataForColumn(invoiceNumber);
@@ -56,6 +66,24 @@ public class ExcelFileReader {
         System.out.println(EmailList.toString());
         System.out.println(PhoneList.toString());
 
+
+        SheetDataReader sheetDataReaderNextSheet = new SheetDataReader(excelSheetReaderNextSheet.getExcelSheet());
+
+        List<String> NameOfServiceList = sheetDataReaderNextSheet.getDataForColumn(nameOfService);
+        List<String> PkwiuList = sheetDataReaderNextSheet.getDataForColumn(pKWiU);
+        List<String> NetPriceList = sheetDataReaderNextSheet.getDataForColumn(netPrice);
+        List<String> GrossPriceList = sheetDataReaderNextSheet.getDataForColumn(grossPrice);
+        List<String> QuantityOfProductList = sheetDataReaderNextSheet.getDataForColumn(quantityOfProduct);
+
+
+        System.out.println(NameOfServiceList.toString());
+        System.out.println(PkwiuList.toString());
+        System.out.println(NetPriceList.toString());
+        System.out.println(GrossPriceList.toString());
+        System.out.println(QuantityOfProductList.toString());
+
+
     }
+
 
 }
