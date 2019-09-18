@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-public class NewContractor extends BasePage {
-    public NewContractor(WebDriver driver) {
+public class NewContractorSearchPage extends BasePage {
+    public NewContractorSearchPage(WebDriver driver) {
         super(driver);
     }
 
