@@ -1,15 +1,16 @@
 package DataFileReader;
-
 import java.io.IOException;
 import java.util.List;
 
+/**Class reading an excel file*/
 public class ExcelFileReader {
 
     public static void main(String[] args) {
 
+        ExcelSheetReader excelSheetReaderForClientData = new ExcelSheetReader();
 
-        ExcelSheetReader excelSheetReader = new ExcelSheetReader();
-        //An index specifying a column called Search Query in the test sheet
+
+        /**A n index specifying a column called Search Query in the test sheet*/
         int invoiceNumber = 0;
         int nipNumber = 1;
         int companyName = 2;
@@ -21,7 +22,7 @@ public class ExcelFileReader {
         int email = 8;
         int phone = 9;
 
-        ExcelSheetReader excelSheetReaderNextSheet = new ExcelSheetReader();
+        ExcelSheetReader excelSheetReaderForProductData = new ExcelSheetReader();
         int nameOfService = 0;
         int pKWiU = 1;
         int netPrice = 2;
@@ -30,19 +31,19 @@ public class ExcelFileReader {
 
         try {
 
-            //Reading/downloading a file named FILE_NAME.xslx and a spreadsheet inside a file named FileName
+            /**Reading/downloading a file named FILE_NAME.xslx and a spreadsheet inside a file named FileName*/
             String excelFileLocation = System.getProperty("user.dir") + "/src/main/resources/" + "test.data.xlsx";
-            excelSheetReader.setExcelFileSheet(excelFileLocation, "Client data");
-            excelSheetReaderNextSheet.setExcelFileSheet(excelFileLocation, "Product data");
+            excelSheetReaderForClientData.setExcelFileSheet(excelFileLocation, "Client data");
+            excelSheetReaderForProductData.setExcelFileSheet(excelFileLocation, "Product data");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        /**Reference of downloaded customer data*/
+        SheetDataReader sheetDataReader = new SheetDataReader(excelSheetReaderForClientData.getExcelSheet());
 
-        SheetDataReader sheetDataReader = new SheetDataReader(excelSheetReader.getExcelSheet());
 
-
-        //Download values for the Search query column
+        /**Download values for the Search query column*/
         List<String> InvoiceNumberList = sheetDataReader.getDataForColumn(invoiceNumber);
         List<String> NipNumberList = sheetDataReader.getDataForColumn(nipNumber);
         List<String> CompanyNameList = sheetDataReader.getDataForColumn(companyName);
@@ -55,20 +56,21 @@ public class ExcelFileReader {
         List<String> PhoneList = sheetDataReader.getDataForColumn(phone);
 
 
-        System.out.println(InvoiceNumberList.toString());
-        System.out.println(NipNumberList.toString());
-        System.out.println(CompanyNameList.toString());
-        System.out.println(StreetList.toString());
-        System.out.println(NumberList.toString());
-        System.out.println(LocalList.toString());
-        System.out.println(ZipCodeList.toString());
-        System.out.println(CityList.toString());
-        System.out.println(EmailList.toString());
-        System.out.println(PhoneList.toString());
+        System.out.println("InvoiceNumberList"+InvoiceNumberList.toString());
+        System.out.println("NipNumberList"+NipNumberList.toString());
+        System.out.println("CompanyNameList"+CompanyNameList.toString());
+        System.out.println("StreetList"+StreetList.toString());
+        System.out.println("NumberList"+NumberList.toString());
+        System.out.println("LocalList"+LocalList.toString());
+        System.out.println("ZipCodeList"+ZipCodeList.toString());
+        System.out.println("CityList"+CityList.toString());
+        System.out.println("EmailList"+EmailList.toString());
+        System.out.println("PhoneList"+PhoneList.toString());
 
+        /**Reference of downloaded product data*/
+        SheetDataReader sheetDataReaderNextSheet = new SheetDataReader(excelSheetReaderForProductData.getExcelSheet());
 
-        SheetDataReader sheetDataReaderNextSheet = new SheetDataReader(excelSheetReaderNextSheet.getExcelSheet());
-
+        /**Download values for the Search query column*/
         List<String> NameOfServiceList = sheetDataReaderNextSheet.getDataForColumn(nameOfService);
         List<String> PkwiuList = sheetDataReaderNextSheet.getDataForColumn(pKWiU);
         List<String> NetPriceList = sheetDataReaderNextSheet.getDataForColumn(netPrice);
@@ -76,11 +78,11 @@ public class ExcelFileReader {
         List<String> QuantityOfProductList = sheetDataReaderNextSheet.getDataForColumn(quantityOfProduct);
 
 
-        System.out.println(NameOfServiceList.toString());
-        System.out.println(PkwiuList.toString());
-        System.out.println(NetPriceList.toString());
-        System.out.println(GrossPriceList.toString());
-        System.out.println(QuantityOfProductList.toString());
+        System.out.println("NameOfServiceList"+NameOfServiceList.toString());
+        System.out.println("PkwiuList"+PkwiuList.toString());
+        System.out.println("NetPriceList"+NetPriceList.toString());
+        System.out.println("GrossPriceList"+GrossPriceList.toString());
+        System.out.println("QuantityOfProductList"+QuantityOfProductList.toString());
 
 
     }
